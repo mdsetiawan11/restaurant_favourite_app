@@ -23,8 +23,8 @@ class DatabaseHelper {
              name TEXT,
              description TEXT,
              pictureId TEXT,
-             city TEXT,                      
-             rating TEXT                       
+             city TEXT,
+             rating TEXT                    
            )     
         ''');
       },
