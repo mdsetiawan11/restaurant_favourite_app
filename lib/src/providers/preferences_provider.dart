@@ -12,7 +12,6 @@ class PreferencesProvider extends ChangeNotifier {
   void _getDailyReminderPreferences() async {
     _isDailyReminderActive = await preferencesHelper.isDailyReminderActive;
     notifyListeners();
-    print(_isDailyReminderActive);
   }
 
   void enableDailyReminder(bool value) {

@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
+import 'package:restaurant_favourite_app/src/models/favorite_restaurant_model.dart';
+
+import 'package:restaurant_favourite_app/src/providers/database_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_detail_provider.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
@@ -48,25 +51,55 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                   )),
                             )),
                         Positioned(
-                            bottom: 10,
-                            right: 35,
-                            child: GestureDetector(
-                              onTap: () {
-                                const snackBar = SnackBar(
-                                  duration: Duration(seconds: 1),
-                                  content:
-                                      Center(child: Text('Added to Favorite!')),
-                                  backgroundColor: (Colors.deepPurple),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
+                            top: 30,
+                            right: 20,
+                            child: Consumer<DatabaseProvider>(
+                              builder: (context, provider, child) {
+                                return FutureBuilder(
+                                    future: provider.isFavorited(
+                                        state.result.restaurant.id),
+                                    builder: (context, snapshot) {
+                                      return snapshot.data == false
+                                          ? GestureDetector(
+                                              onTap: () {
+                                                provider.addFavorite(Restaurant(
+                                                  id: state
+                                                      .result.restaurant.id,
+                                                  name: state
+                                                      .result.restaurant.name,
+                                                  description: state.result
+                                                      .restaurant.description,
+                                                  pictureId: state.result
+                                                      .restaurant.pictureId,
+                                                  city: state
+                                                      .result.restaurant.city,
+                                                  rating: state
+                                                      .result.restaurant.rating,
+                                                ));
+
+                                                const snackBar = SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  content: Center(
+                                                      child: Text(
+                                                          'Added to Favorite!')),
+                                                  backgroundColor:
+                                                      (Colors.deepPurple),
+                                                );
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
+                                              },
+                                              child: CircleAvatar(
+                                                  backgroundColor: Colors.pink
+                                                      .withOpacity(0.9),
+                                                  child: const Icon(
+                                                    Icons.favorite_border,
+                                                    color: Colors.white,
+                                                  )),
+                                            )
+                                          : const SizedBox();
+                                    });
                               },
-                              child: CircleAvatar(
-                                  backgroundColor: Colors.pink.withOpacity(0.9),
-                                  child: const Icon(
-                                    Icons.favorite,
-                                    color: Colors.white,
-                                  )),
                             )),
                       ],
                     ),

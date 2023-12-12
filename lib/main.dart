@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_favourite_app/src/helpers/database_helper.dart';
 import 'package:restaurant_favourite_app/src/helpers/preferences_helper.dart';
+import 'package:restaurant_favourite_app/src/providers/database_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_list_provider.dart';
@@ -57,14 +59,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<RestaurantListProvider>(
-            create: (_) => RestaurantListProvider(
-                restaurantServices: RestaurantServices())),
+          create: (_) =>
+              RestaurantListProvider(restaurantServices: RestaurantServices()),
+        ),
         ChangeNotifierProvider(
             create: (_) => PreferencesProvider(
-                  preferencesHelper: PreferencesHelper(
-                    sharedPreferences: SharedPreferences.getInstance(),
-                  ),
-                )),
+                    preferencesHelper: PreferencesHelper(
+                  sharedPreferences: SharedPreferences.getInstance(),
+                ))),
+        ChangeNotifierProvider(
+            create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper())),
       ],
       child: MaterialApp.router(
         routerConfig: _router,

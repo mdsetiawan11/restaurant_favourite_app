@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_favourite_app/src/screens/favorite_restaurant.dart';
 import 'package:restaurant_favourite_app/src/screens/info.dart';
 import 'package:restaurant_favourite_app/src/screens/restaurant_list.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
@@ -64,6 +65,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 List<Widget> _pages = <Widget>[
   // const AdminDashboard(),
   const RestaurantListScreen(),
-  const Text('Restaurant Fav Screen'),
+  const FavoriteRestaurantScreen(),
   const InfoScreen(),
 ];
