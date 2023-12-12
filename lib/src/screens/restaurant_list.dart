@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
+import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_list_provider.dart';
 import 'package:restaurant_favourite_app/src/widgets/restaurant_card.dart';
 
@@ -27,7 +28,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             } else if (state.state == ResultState.hasData) {
               return CustomScrollView(
                 slivers: [
-                  const SliverAppBar(
+                  SliverAppBar(
                     floating: true,
                     title: Row(
                       children: [
@@ -43,6 +44,17 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                         )
                       ],
                     ),
+                    actions: [
+                      Consumer<PreferencesProvider>(
+                        builder: (context, provider, child) {
+                          return Switch.adaptive(
+                              value: provider.isDailyReminderActive,
+                              onChanged: (value) {
+                                provider.enableDailyReminder(value);
+                              });
+                        },
+                      )
+                    ],
                   ),
                   SliverList.builder(
                     itemCount: state.result.restaurants.length,

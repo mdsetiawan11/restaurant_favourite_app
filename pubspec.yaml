@@ -19,6 +19,8 @@ dependencies:
   http:
   provider:
   google_fonts:
+  shared_preferences:
+  sqflite:
 
   cupertino_icons: ^1.0.2
 
