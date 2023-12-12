@@ -30,7 +30,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 slivers: [
                   SliverAppBar(
                     floating: true,
-                    title: Row(
+                    title: const Row(
                       children: [
                         Text('Restaurant'),
                         SizedBox(
