@@ -5,19 +5,23 @@ import 'package:restaurant_favourite_app/src/models/restaurant_detail_model.dart
 import 'package:restaurant_favourite_app/src/models/restaurant_list_model.dart';
 
 class RestaurantServices {
-  Future getRestaurantList() async {
+  Future<RestaurantListModel> getRestaurantList() async {
     final response = await http.get(Uri.parse('${apiUrl}list'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return RestaurantListModel.fromJson(data);
+    } else {
+      throw Exception("${response.statusCode}");
     }
   }
 
-  Future getRestaurantDetail(id) async {
+  Future<RestaurantDetailModel> getRestaurantDetail(id) async {
     final response = await http.get(Uri.parse('${apiUrl}detail/$id'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return RestaurantDetailModel.fromJson(data);
+    } else {
+      throw Exception("${response.statusCode}");
     }
   }
 }

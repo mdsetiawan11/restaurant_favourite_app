@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
+// ignore: unused_import
 import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
 import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_list_provider.dart';
@@ -16,23 +17,6 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
-  final NotificationHelper _notificationHelper = NotificationHelper();
-
-  @override
-  void initState() {
-    super.initState();
-    _notificationHelper.configureSelectNotificationSubject(context, 'a');
-    _notificationHelper.configureDidReceiveLocalNotificationSubject(
-        context, 'a');
-  }
-
-  @override
-  void dispose() {
-    selectNotificationSubject.close();
-    didReceiveLocalNotificationSubject.close();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

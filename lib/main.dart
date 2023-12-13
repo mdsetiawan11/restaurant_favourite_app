@@ -22,9 +22,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final NotificationHelper notificationHelper = NotificationHelper();
-
   await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
-  notificationHelper.requestIOSPermissions(flutterLocalNotificationsPlugin);
   runApp(const MyApp());
 }
 

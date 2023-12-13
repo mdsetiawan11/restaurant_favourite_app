@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:restaurant_favourite_app/main.dart';
 import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
+import 'package:restaurant_favourite_app/src/models/restaurant_list_model.dart';
+import 'package:restaurant_favourite_app/src/services/restaurant_services.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -13,22 +14,7 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
   final NotificationHelper _notificationHelper = NotificationHelper();
-
-  @override
-  void initState() {
-    super.initState();
-    _notificationHelper.configureSelectNotificationSubject(
-        context, 'detailpage');
-    _notificationHelper.configureDidReceiveLocalNotificationSubject(
-        context, 'detailpage');
-  }
-
-  @override
-  void dispose() {
-    selectNotificationSubject.close();
-    didReceiveLocalNotificationSubject.close();
-    super.dispose();
-  }
+  final RestaurantServices _restaurantServices = RestaurantServices();
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +39,10 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
                 MaterialButton(
                   onPressed: () async {
-                    await _notificationHelper
-                        .showNotification(flutterLocalNotificationsPlugin);
+                    final result =
+                        await _restaurantServices.getRestaurantList();
+                    await _notificationHelper.showNotificationPic(
+                        flutterLocalNotificationsPlugin, result);
                   },
                   child: const Text('Button'),
                 )
