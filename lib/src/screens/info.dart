@@ -37,15 +37,6 @@ class _InfoScreenState extends State<InfoScreen> {
                   'Aplikasi dibuat oleh Muhammad Dadang Setiawan untuk memenuhi tugas proyek 3 pada kelas Belajar Fundamental Aplikasi Flutter - Dicoding.com',
                   textAlign: TextAlign.center,
                 ),
-                MaterialButton(
-                  onPressed: () async {
-                    final result =
-                        await _restaurantServices.getRestaurantList();
-                    await _notificationHelper.showNotificationPic(
-                        flutterLocalNotificationsPlugin, result);
-                  },
-                  child: const Text('Button'),
-                )
               ],
             ),
           )),

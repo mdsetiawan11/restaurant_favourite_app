@@ -1,3 +1,4 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
@@ -11,10 +12,10 @@ import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart
 import 'package:restaurant_favourite_app/src/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_list_provider.dart';
 import 'package:restaurant_favourite_app/src/screens/bottom_nav_bar.dart';
-import 'package:restaurant_favourite_app/src/screens/detail.dart';
 import 'package:restaurant_favourite_app/src/screens/restaurant_detail.dart';
 import 'package:restaurant_favourite_app/src/screens/splash.dart';
 import 'package:restaurant_favourite_app/src/services/restaurant_services.dart';
+import 'package:restaurant_favourite_app/src/utils/background_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -23,6 +24,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final NotificationHelper notificationHelper = NotificationHelper();
   await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+  await AndroidAlarmManager.initialize();
+  final BackgroundService service = BackgroundService();
+  service.initializeIsolate();
   runApp(const MyApp());
 }
 
@@ -39,13 +43,6 @@ final GoRouter _router = GoRouter(
           path: 'home',
           builder: (BuildContext context, GoRouterState state) {
             return const BottomNavBar();
-          },
-        ),
-        GoRoute(
-          name: 'detailpage',
-          path: 'detailpage',
-          builder: (BuildContext context, GoRouterState state) {
-            return const DetailPage();
           },
         ),
         GoRoute(
