@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +50,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                       GestureDetector(
                         onTap: () {
                           NDialog(
+                            title: const Text('Settings'),
                             content: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: ListTile(
