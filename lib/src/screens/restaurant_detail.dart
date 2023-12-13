@@ -97,7 +97,31 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                                     color: Colors.white,
                                                   )),
                                             )
-                                          : const SizedBox();
+                                          : GestureDetector(
+                                              onTap: () {
+                                                provider.removeFavorite(
+                                                    state.result.restaurant.id);
+
+                                                const snackBar = SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  content: Center(
+                                                      child: Text(
+                                                          'Removed from Favorite!')),
+                                                  backgroundColor:
+                                                      (Colors.deepPurple),
+                                                );
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
+                                              },
+                                              child: CircleAvatar(
+                                                  backgroundColor: Colors.pink
+                                                      .withOpacity(0.9),
+                                                  child: const Icon(
+                                                    Icons.favorite,
+                                                    color: Colors.white,
+                                                  )),
+                                            );
                                     });
                               },
                             )),
