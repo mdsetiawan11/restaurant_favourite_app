@@ -4,7 +4,6 @@ import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:restaurant_favourite_app/main.dart';
 import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
-import 'package:restaurant_favourite_app/src/models/favorite_restaurant_model.dart';
 import 'package:restaurant_favourite_app/src/services/restaurant_services.dart';
 
 final ReceivePort port = ReceivePort();

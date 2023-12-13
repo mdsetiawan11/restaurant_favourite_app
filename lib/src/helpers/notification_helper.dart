@@ -62,11 +62,11 @@ class NotificationHelper {
     var channelName = "channel_01";
     var channelDesc = "resturantapp channel";
     var bigPicturePath = await _downloadAndSaveFile(
-        imgUrl + restaurants.restaurants!.randomItem().pictureId, 'bigPicture');
+        imgUrl + restaurants.restaurants.randomItem().pictureId, 'bigPicture');
 
     var bigPictureStyleInformation = BigPictureStyleInformation(
       FilePathAndroidBitmap(bigPicturePath),
-      contentTitle: restaurants.restaurants!.randomItem().name,
+      contentTitle: restaurants.restaurants.randomItem().name,
       htmlFormatContentTitle: true,
       summaryText: 'Recomendation restaurant for you',
       htmlFormatSummaryText: true,
@@ -82,7 +82,7 @@ class NotificationHelper {
     var platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     var titleNotification = "<b>Restaurant App</b>";
-    var titleRestaurant = restaurants.restaurants!.randomItem()!.name;
+    var titleRestaurant = restaurants.restaurants.randomItem().name;
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleRestaurant, platformChannelSpecifics,
         payload: json.encode(restaurants.toJson()));
@@ -92,7 +92,7 @@ class NotificationHelper {
     selectNotificationSubject.stream.listen(
       (String payload) async {
         var data = RestaurantListModel.fromJson(json.decode(payload));
-        var restaurant = data.restaurants!.randomItem()!;
+        var restaurant = data.restaurants.randomItem();
         NavigationToDetail.intentWithData(route, restaurant);
       },
     );

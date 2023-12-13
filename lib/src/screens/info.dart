@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:restaurant_favourite_app/main.dart';
-import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
-import 'package:restaurant_favourite_app/src/models/restaurant_list_model.dart';
-import 'package:restaurant_favourite_app/src/services/restaurant_services.dart';
 
-class InfoScreen extends StatefulWidget {
+class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
-
-  @override
-  State<InfoScreen> createState() => _InfoScreenState();
-}
-
-class _InfoScreenState extends State<InfoScreen> {
-  final NotificationHelper _notificationHelper = NotificationHelper();
-  final RestaurantServices _restaurantServices = RestaurantServices();
 
   @override
   Widget build(BuildContext context) {
