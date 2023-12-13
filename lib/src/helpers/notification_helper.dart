@@ -143,7 +143,9 @@ class NotificationHelper {
 
   void configureSelectNotificationSubject(BuildContext context, String route) {
     selectNotificationSubject.stream.listen((String? payload) async {
-      await context.pushNamed('detailpage');
+      if (payload != null) {
+        await context.pushNamed('detailpage');
+      }
     });
   }
 }
