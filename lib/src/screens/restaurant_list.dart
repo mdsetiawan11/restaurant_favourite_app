@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
 import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
@@ -45,14 +46,37 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                       ],
                     ),
                     actions: [
-                      Consumer<PreferencesProvider>(
-                        builder: (context, provider, child) {
-                          return Switch.adaptive(
-                              value: provider.isDailyReminderActive,
-                              onChanged: (value) {
-                                provider.enableDailyReminder(value);
-                              });
+                      GestureDetector(
+                        onTap: () {
+                          NDialog(
+                            content: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: ListTile(
+                                title: const Text('Daily Reminder'),
+                                trailing: Consumer<PreferencesProvider>(
+                                  builder: (context, provider, child) {
+                                    return Switch.adaptive(
+                                        value: provider.isDailyReminderActive,
+                                        onChanged: (value) {
+                                          provider.enableDailyReminder(value);
+                                        });
+                                  },
+                                ),
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                  child: const Text("Close"),
+                                  onPressed: () => Navigator.pop(context)),
+                            ],
+                          ).show(context);
                         },
+                        child: const Icon(
+                          Icons.settings,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
                       )
                     ],
                   ),

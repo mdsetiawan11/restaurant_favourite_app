@@ -21,6 +21,7 @@ dependencies:
   google_fonts:
   shared_preferences:
   sqflite:
+  ndialog: ^4.3.1
 
   cupertino_icons: ^1.0.2
 

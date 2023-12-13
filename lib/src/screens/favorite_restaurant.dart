@@ -14,7 +14,7 @@ class FavoriteRestaurantScreen extends StatelessWidget {
       body: Consumer<DatabaseProvider>(
         builder: (context, provider, child) {
           if (provider.state == ResultState.loading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (provider.state == ResultState.hasData) {
