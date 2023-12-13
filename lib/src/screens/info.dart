@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:restaurant_favourite_app/main.dart';
+import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
 
-class InfoScreen extends StatelessWidget {
+class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
+
+  @override
+  State<InfoScreen> createState() => _InfoScreenState();
+}
+
+class _InfoScreenState extends State<InfoScreen> {
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper.configureSelectNotificationSubject(context, 'detail');
+    _notificationHelper.configureDidReceiveLocalNotificationSubject(
+        context, 'detail');
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    didReceiveLocalNotificationSubject.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +48,13 @@ class InfoScreen extends StatelessWidget {
                 const Text(
                   'Aplikasi dibuat oleh Muhammad Dadang Setiawan untuk memenuhi tugas proyek 3 pada kelas Belajar Fundamental Aplikasi Flutter - Dicoding.com',
                   textAlign: TextAlign.center,
+                ),
+                MaterialButton(
+                  onPressed: () async {
+                    await _notificationHelper.showBigPictureNotification(
+                        flutterLocalNotificationsPlugin);
+                  },
+                  child: Text('Button'),
                 )
               ],
             ),

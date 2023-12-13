@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_favourite_app/src/helpers/database_helper.dart';
+import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
 import 'package:restaurant_favourite_app/src/helpers/preferences_helper.dart';
 import 'package:restaurant_favourite_app/src/providers/database_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
@@ -14,7 +16,14 @@ import 'package:restaurant_favourite_app/src/screens/splash.dart';
 import 'package:restaurant_favourite_app/src/services/restaurant_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper notificationHelper = NotificationHelper();
+
+  await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+  notificationHelper.requestIOSPermissions(flutterLocalNotificationsPlugin);
   runApp(const MyApp());
 }
 

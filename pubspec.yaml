@@ -23,6 +23,9 @@ dependencies:
   sqflite:
   ndialog: ^4.3.1
   flutter_local_notifications: ^16.2.0
+  rxdart: ^0.27.7
+  path_provider:
+  timezone:
 
   cupertino_icons: ^1.0.2
 
