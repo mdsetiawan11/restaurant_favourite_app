@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:restaurant_favourite_app/src/models/notification_model.dart';
 import 'package:rxdart/subjects.dart';
@@ -15,8 +16,8 @@ final didReceiveLocalNotificationSubject =
 
 class NotificationHelper {
   static const _channelId = "01";
-  static const _channelName = "channel_01";
-  static const _channelDesc = "dicoding channel";
+  static const _channelName = "Restaurant App";
+  static const _channelDesc = "Restaurant App Channel";
   static NotificationHelper? _instance;
 
   NotificationHelper._internal() {
@@ -52,6 +53,7 @@ class NotificationHelper {
         if (payload != null) {
           log('notification payload: $payload');
         }
+
         selectNotificationSubject.add(payload ?? 'empty payload');
       },
     );
@@ -98,31 +100,6 @@ class NotificationHelper {
     });
   }
 
-  Future<void> showNotification(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-        _channelId, _channelName,
-        channelDescription: _channelDesc,
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker');
-
-    var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
-
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics,
-    );
-
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'plain title',
-      'plain body',
-      platformChannelSpecifics,
-      payload: 'plain notification',
-    );
-  }
-
   Future<String> _downloadAndSaveFile(String url, String fileName) async {
     var directory = await getApplicationDocumentsDirectory();
     var filePath = '${directory.path}/$fileName';
@@ -132,7 +109,7 @@ class NotificationHelper {
     return filePath;
   }
 
-  Future<void> showBigPictureNotification(
+  Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var bigPicturePath = await _downloadAndSaveFile(
         'https://restaurant-api.dicoding.dev/images/medium/14', 'bigPicture');
@@ -157,17 +134,16 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.show(
       0,
-      'big text title',
-      'silent body',
+      '',
+      'restaurant picture',
       platformChannelSpecifics,
-      payload: 'detail',
+      payload: 'abc',
     );
   }
 
   void configureSelectNotificationSubject(BuildContext context, String route) {
     selectNotificationSubject.stream.listen((String? payload) async {
-      await Navigator.pushNamed(context, route,
-          arguments: ReceivedNotification(payload: payload));
+      await context.pushNamed('detailpage');
     });
   }
 }

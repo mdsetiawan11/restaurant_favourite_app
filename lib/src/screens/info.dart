@@ -16,9 +16,10 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   void initState() {
     super.initState();
-    _notificationHelper.configureSelectNotificationSubject(context, 'detail');
+    _notificationHelper.configureSelectNotificationSubject(
+        context, 'detailpage');
     _notificationHelper.configureDidReceiveLocalNotificationSubject(
-        context, 'detail');
+        context, 'detailpage');
   }
 
   @override
@@ -51,10 +52,10 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
                 MaterialButton(
                   onPressed: () async {
-                    await _notificationHelper.showBigPictureNotification(
-                        flutterLocalNotificationsPlugin);
+                    await _notificationHelper
+                        .showNotification(flutterLocalNotificationsPlugin);
                   },
-                  child: Text('Button'),
+                  child: const Text('Button'),
                 )
               ],
             ),
