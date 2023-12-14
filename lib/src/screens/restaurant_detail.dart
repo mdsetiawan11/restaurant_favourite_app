@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
 import 'package:restaurant_favourite_app/src/models/favorite_restaurant_model.dart';
-
 import 'package:restaurant_favourite_app/src/providers/database_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_detail_provider.dart';
 
