@@ -27,7 +27,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
       builder: (context, child) {
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: 80,
+            toolbarHeight: 100,
             flexibleSpace: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
