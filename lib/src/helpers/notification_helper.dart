@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
@@ -93,6 +92,7 @@ class NotificationHelper {
       (String payload) async {
         var data = RestaurantListModel.fromJson(json.decode(payload));
         var restaurant = data.restaurants.randomItem();
+
         NavigationToDetail.intentWithData(route, restaurant);
       },
     );

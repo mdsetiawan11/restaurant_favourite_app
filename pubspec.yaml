@@ -27,6 +27,7 @@ dependencies:
   path_provider:
   android_alarm_manager_plus: ^3.0.4
   intl:
+  flutter_animate: ^4.3.0
 
   cupertino_icons: ^1.0.2
 

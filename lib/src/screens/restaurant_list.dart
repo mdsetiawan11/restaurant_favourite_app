@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_favourite_app/src/common/constant.dart';
-// ignore: unused_import
-import 'package:restaurant_favourite_app/src/helpers/notification_helper.dart';
 import 'package:restaurant_favourite_app/src/providers/preferences_provider.dart';
 import 'package:restaurant_favourite_app/src/providers/restaurant_list_provider.dart';
 import 'package:restaurant_favourite_app/src/widgets/restaurant_card.dart';
 
-class RestaurantListScreen extends StatefulWidget {
+class RestaurantListScreen extends StatelessWidget {
   const RestaurantListScreen({super.key});
 
-  @override
-  State<RestaurantListScreen> createState() => _RestaurantListScreenState();
-}
-
-class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +82,14 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                     itemBuilder: ((context, index) {
                       var restaurant = state.result.restaurants[index];
                       return GestureDetector(
-                          onTap: () {
-                            context.pushNamed('detail', pathParameters: {
-                              "id": restaurant.id,
-                            });
-                          },
-                          child: RestaurantCard(restaurant: restaurant));
+                              onTap: () {
+                                context.pushNamed('detail', pathParameters: {
+                                  "id": restaurant.id,
+                                });
+                              },
+                              child: RestaurantCard(restaurant: restaurant))
+                          .animate()
+                          .fade();
                     }),
                   )
                 ],

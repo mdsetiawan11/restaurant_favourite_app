@@ -28,7 +28,7 @@ class BackgroundService {
 
   static Future<void> callback() async {
     if (kDebugMode) {
-      print('Alarm fired!');
+      print('Alarm launched!');
     }
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await RestaurantServices().getRestaurantList();

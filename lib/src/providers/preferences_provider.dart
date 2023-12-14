@@ -1,8 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:restaurant_favourite_app/src/helpers/preferences_helper.dart';
-
 import 'package:restaurant_favourite_app/src/helpers/time_helper.dart';
 import 'package:restaurant_favourite_app/src/utils/background_services.dart';
 
@@ -32,9 +30,11 @@ class PreferencesProvider extends ChangeNotifier {
           startAt: TimeHelper.format(), exact: true, wakeup: true);
     } else {
       if (kDebugMode) {
-        print('Scheduling Restaurant Canceled');
+        print('Daily Reminder Canceled');
       }
       return await AndroidAlarmManager.cancel(1);
     }
   }
 }
+
+// 

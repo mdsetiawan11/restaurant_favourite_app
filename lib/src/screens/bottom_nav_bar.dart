@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_favourite_app/src/screens/favorite_restaurant.dart';
 import 'package:restaurant_favourite_app/src/screens/info.dart';
 import 'package:restaurant_favourite_app/src/screens/restaurant_list.dart';
+import 'package:restaurant_favourite_app/src/screens/search_restaurant.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -49,6 +50,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
             title: 'Restaurant',
           ),
           BarItem(
+            icon: Icons.search,
+            title: 'Search',
+          ),
+          BarItem(
             icon: Icons.favorite,
             title: 'Favorite',
           ),
@@ -63,8 +68,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
 }
 
 List<Widget> _pages = <Widget>[
-  // const AdminDashboard(),
   const RestaurantListScreen(),
+  const SearchRestaurantScreen(),
   const FavoriteRestaurantScreen(),
   const InfoScreen(),
 ];
