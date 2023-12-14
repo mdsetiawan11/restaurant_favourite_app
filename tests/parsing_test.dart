@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:restaurant_favourite_app/src/models/restaurant_list_model.dart';
 
-var JsonRestaurantListTest = {
+var jsonRestaurantListTest = {
   "id": "s1knt6za9kkfw1e867",
   "name": "Kafe Kita",
   "description":
@@ -15,8 +15,8 @@ void main() {
   test("Json Parsing Test", () async {
     var expectedId = "s1knt6za9kkfw1e867";
     var expectedName = 'Kafe Kita';
-    var resultId = Restaurant.fromJson(JsonRestaurantListTest).id;
-    var resultName = Restaurant.fromJson(JsonRestaurantListTest).name;
+    var resultId = Restaurant.fromJson(jsonRestaurantListTest).id;
+    var resultName = Restaurant.fromJson(jsonRestaurantListTest).name;
 
     expect(resultId, expectedId);
     expect(resultName, expectedName);
