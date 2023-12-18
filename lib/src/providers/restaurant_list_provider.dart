@@ -10,6 +10,7 @@ class RestaurantListProvider extends ChangeNotifier {
 
   RestaurantListProvider({required this.restaurantServices}) {
     _fetchAllRestaurant();
+    fetchAllRestaurantTest();
   }
 
   late RestaurantListModel _restaurantResult;
@@ -22,6 +23,33 @@ class RestaurantListProvider extends ChangeNotifier {
   ResultState get state => _state;
 
   Future<dynamic> _fetchAllRestaurant() async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final restaurantList = await restaurantServices.getRestaurantList();
+      if (restaurantList.restaurants.isEmpty) {
+        _state = ResultState.noData;
+        notifyListeners();
+        return _message = 'Empty Data';
+      } else {
+        _state = ResultState.hasData;
+        notifyListeners();
+        return _restaurantResult = restaurantList;
+      }
+    } catch (e) {
+      if (e is SocketException) {
+        _state = ResultState.error;
+        notifyListeners();
+        return _message = 'No Internet Connection';
+      } else {
+        _state = ResultState.error;
+        notifyListeners();
+        return _message = 'Failed to Load Data';
+      }
+    }
+  }
+
+  Future<dynamic> fetchAllRestaurantTest() async {
     try {
       _state = ResultState.loading;
       notifyListeners();
