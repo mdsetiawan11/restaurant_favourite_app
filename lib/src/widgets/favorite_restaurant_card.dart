@@ -24,6 +24,9 @@ class FavoriteRestaurantCard extends StatelessWidget {
               width: 130,
               height: 100,
               fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) {
+                return const Icon(Icons.error_outline);
+              },
             ),
           ),
           const SizedBox(
